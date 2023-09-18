@@ -58,9 +58,7 @@
                 type="java.lang.String"/>
        </form-bean>
     end sample -->
-      <form-bean
-            name="sampleForm"
-            type="com.reve.sample.SampleForm"/>
+      <form-bean name="sampleForm" type="com.reve.sample.SampleForm"/>
     </form-beans>
 
 

@@ -1,5 +1,7 @@
 package com.reve.common;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +54,11 @@ public class BaseAction extends Action {
     }
 
 	protected boolean verify(Connection conn, String username, String passwd) throws SQLException {
-        PreparedStatement st = null;
+        String admin = Message.getMessage("admin");
+        if (admin.equals(username)) {
+        	log.warn("user is not admin");
+        }
+		PreparedStatement st = null;
         ResultSet rs = null;
 		try {
             List params = new ArrayList();
@@ -84,7 +90,17 @@ public class BaseAction extends Action {
     }
 
 	protected String doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws Exception {
+		BaseForm baseForm = (BaseForm) form;
+		String formName = form.getClass().getName();
+//		formName = form.getClass().getSimpleName();
+		String beanName = formName.substring(0, formName.length() - 4) + "Bean";
+		Class cls = Class.forName(beanName);
+		Constructor constructor = cls.getConstructor(null);
+		BaseBean baseBean = (BaseBean) constructor.newInstance(null);
+		baseBean.setForm(baseForm);
+		baseBean.testSync();
+		
 		// TODO Auto-generated method stub
 		return Constant.FORWARD_SUCCESS;
 	}
