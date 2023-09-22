@@ -59,6 +59,7 @@
        </form-bean>
     end sample -->
       <form-bean name="sampleForm" type="com.reve.sample.SampleForm"/>
+      <form-bean name="BootForm" type="com.reve.common.BootForm"/>
     </form-beans>
 
 
@@ -129,6 +130,10 @@
         	<forward name="fail" path="/sample/sample.jsp"></forward>
     </action-mappings> -->
         <action path="/Sample" type="com.reve.sample.SampleAction" name="sampleForm">
+        	<forward name="success" path="/sample/sample.jsp"></forward>
+        	<forward name="fail" path="/sample/sample.jsp"></forward>
+        </action>
+        <action path="/Boot" type="com.reve.common.BootAction" name="BootForm">
         	<forward name="success" path="/sample/sample.jsp"></forward>
         	<forward name="fail" path="/sample/sample.jsp"></forward>
         </action>

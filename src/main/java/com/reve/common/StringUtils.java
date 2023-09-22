@@ -1,5 +1,7 @@
 package com.reve.common;
 
+import org.slf4j.Logger;
+
 public class StringUtils {
 
 	public static String number(Object obj) {
@@ -16,5 +18,9 @@ public class StringUtils {
 		}
 		
 		return obj.toString();
+	}
+	
+	public static void outputExceptionLog(Logger log, Exception e) {
+		log.warn(e.getMessage() + e.getCause() + e.getClass());
 	}
 }

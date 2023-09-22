@@ -1,7 +1,6 @@
 package com.reve.common;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ import org.apache.struts.action.ActionMapping;
 
 public class BaseAction extends Action {
 	private static final String Session_User = "SessoinUser";
-	private Logger log;
+	protected Logger log;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -99,6 +98,7 @@ public class BaseAction extends Action {
 		Constructor constructor = cls.getConstructor(null);
 		BaseBean baseBean = (BaseBean) constructor.newInstance(null);
 		baseBean.setForm(baseForm);
+		baseBean.setLog(log);
 		baseBean.testSync();
 		
 		// TODO Auto-generated method stub
